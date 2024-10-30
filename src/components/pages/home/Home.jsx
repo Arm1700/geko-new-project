@@ -45,8 +45,8 @@ export default function Home() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:8000/api/courses/`);
-                // const response = await fetch(`https://dev.gekoeducation.com/api/categories/`);
+                // const response = await fetch(`http://127.0.0.1:8000/api/courses/`);
+                const response = await fetch(`https://grandstage.gekoeducation.com/api/courses/`);
                 const data = await response.json();
                 console.log(data)
                 setCourses(data); // Сохранение категорий в состояние
@@ -62,8 +62,8 @@ export default function Home() {
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:8000/api/certificate/`);
-                // const response = await fetch(`https://dev.gekoeducation.com/api/certifucate`);
+                // const response = await fetch(`http://127.0.0.1:8000/api/certificate/`);
+                const response = await fetch(`https://grandstage.gekoeducation.com/api/certifucate`);
                 const data = await response.json();
                 console.log(data)
                 setCertificate(data); // Сохранение категорий в состояние

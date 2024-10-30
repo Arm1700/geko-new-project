@@ -1,4 +1,4 @@
-const certifucateArray = [
+const certificateArray = [
   {
     id: 1,
     image: 'https://eduma.thimpress.com/wp-content/uploads/2022/11/certificates-new-1-2.png',
@@ -17,4 +17,4 @@ const certifucateArray = [
   },
 ];
 
-export default certifucateArray;
+export default certificateArray;

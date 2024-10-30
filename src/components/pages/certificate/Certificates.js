@@ -30,12 +30,12 @@ export default function Certificates() {
         const fetchCategories = async () => {
             try {
                 // const response = await fetch(`http://127.0.0.1:8000/api/certificate/`);
-                const response = await fetch(`https://grandstage.gekoeducation.com/api/certifucate`);
+                const response = await fetch(`https://grandstage.gekoeducation.com/api/certificate`);
                 const data = await response.json();
                 console.log(data)
                 setCertificates(data); // Сохранение категорий в состояние
             } catch (error) {
-                console.error('Error fetching certifucate:', error);
+                console.error('Error fetching certificate:', error);
             }
         };
 

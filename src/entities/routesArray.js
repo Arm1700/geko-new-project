@@ -1,9 +1,9 @@
-import AboutUs from '../components/pages/about/AboutUs'
 import Gallery from "../components/pages/gallery/Gallery";
 import Contacts from '../components/pages/contacts/Contacts'
 import Courses from '../components/pages/courses/Courses'
 import Events from '../components/pages/events/Events'
 import Home from '../components/pages/home/Home'
+import Certificates from "../components/pages/certificate/Certificates";
 
 export const routesArray = [
   {
@@ -19,17 +19,22 @@ export const routesArray = [
     path: '/course-category',
   },
   {
-    id: 3,
-    name: 'EVENTS',
-    component: Events,
-    path: '/events',
-  },
-
-  {
     id: 4,
     name: 'GALLERY',
     component: Gallery,
     path: '/gallery',
+  },
+  {
+    id: 6,
+    name: 'CERTIFICATES',
+    component: Certificates,
+    path: '/certificates',
+  },
+  {
+    id: 3,
+    name: 'EVENTS',
+    component: Events,
+    path: '/events',
   },
   {
     id: 5,
@@ -37,12 +42,7 @@ export const routesArray = [
     component: Contacts,
     path: '/contacts',
   },
-  {
-    id: 6,
-    name: 'ABOUT_US',
-    component: AboutUs,
-    path: '/about-us',
-  },
+
 
   // {
   //   id: 7,

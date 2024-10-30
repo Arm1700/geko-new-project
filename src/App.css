@@ -2,13 +2,47 @@
 .absoluteP {
     transform: translate(-50%, -50%);
 }
-
-.opacityPopularCourse {
+.opacityPopularCourseStand{
     transition: all 1s ease;
 }
-.opacityPopularCourse2 {
-    transition: all 0.5s ease;
+.opacityPopularCourseStand2 {
+    transition: all 0.5s ;
 }
+/*.opacityPopularCourse {*/
+/*    position: relative;*/
+/*    overflow: hidden;*/
+/*    max-height: 400px;*/
+/*    transition: transform 0.4s ease-in-out;*/
+/*}*/
+
+/*.opacityPopularCourse img {*/
+/*    width: 100%;*/
+/*    object-fit: cover;*/
+/*    transition: transform 0.4s ease-in-out;*/
+/*}*/
+
+/*.opacityPopularCourse img.translate-y-1-2 {*/
+/*    transform: translateY(50%); !* Сдвигаем изображение вниз на 50% при наведении *!*/
+/*}*/
+
+/*.opacityPopularCourse .hover-content {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 50%; !* Верхняя половина контейнера *!*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    align-items: center;*/
+/*    transform: translateY(-100%); !* Скрываем блок за пределами видимости *!*/
+/*    transition: transform 0.5s ease; !* Переход для плавного появления *!*/
+/*}*/
+
+/*.opacityPopularCourse:hover .hover-content {*/
+/*    transform: translateY(0); !* Показываем блок при наведении *!*/
+/*}*/
+
+
 
 /* Pagination.css */
 
@@ -71,19 +105,20 @@
 }
 
 .popular {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 15px;
+    width: 1300px;
 }
 
-.popularDiv {
-    max-width: 1300px;
-}
+@media (max-width: 1300px) {
+    .popular {
+        width: 100%;
+    }
 
+    .popularDiv {
+        width: 100%;
+    }
+}
 @media (max-width: 992px) {
     .popular {
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
         gap: 20px;
     }
 
@@ -101,6 +136,52 @@
     .popularDiv {
         width: 100%;
     }
+}
+
+
+.certificate-image {
+    background-color: #f4f4f4;
+    padding: 15px;
+    width: 100%;
+    height: 200px; /* Задаем фиксированную высоту */
+    object-fit: fill; /* Масштабируем изображение, чтобы оно заполнило контейнер, сохраняя пропорции */
+}
+
+/* Пример использования Tailwind CSS */
+.aspect-w-1 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* Соотношение 1:1 */
+}
+
+.aspect-w-4 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 75%; /* Соотношение 4:3 */
+}
+
+.aspect-w-16 {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Соотношение 16:9 */
+}
+
+.object-cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Обеспечивает полное покрытие контейнера */
+}
+
+
+::-webkit-scrollbar {
+    width: 7px;
+}
+::-webkit-scrollbar-thumb {
+    background: #5625D0; /* Use a darker shade or different color for the scrollbar handle */
+    border-radius: 6px;
 }
 
 .bgColorArticle::before {

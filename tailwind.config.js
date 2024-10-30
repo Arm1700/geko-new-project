@@ -33,6 +33,9 @@ module.exports = {
 
 
             },
+            transform: {
+                'rotate-x-180': 'rotateX(40deg)',
+            },
             fontFamily: {
                 sans: ['"Roboto"'],
                 // 'roboto-slab': ['"Roboto Slab"', 'serif'],
@@ -69,7 +72,7 @@ module.exports = {
             md: '992px',
             mdLg: {'min': '993px', 'max': '1279px'},
             center: '1200px',
-            lg: '1280px',
+            lg: '1300px',
             big: '1370px',
             xl: '1920px',
         },

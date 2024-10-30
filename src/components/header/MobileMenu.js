@@ -1,12 +1,10 @@
 import { Link, useLocation } from 'react-router-dom';
 import { routesArray } from '../../entities/routesArray';
-import { useTranslation } from 'react-i18next';
 import { FiX } from 'react-icons/fi';
 import Logo from "../pages/shared/Logo";
 
 export default function MobileMenu({ isOpen, toggleMenu }) {
   const { pathname } = useLocation();
-  const { t } = useTranslation();
 
   return (
     <div
@@ -30,7 +28,7 @@ export default function MobileMenu({ isOpen, toggleMenu }) {
               pathname === route.path ? 'text-color56' : 'text-secondary'
             }`}
           >
-            {t(route.name)}
+            {route.name}
           </Link>
         ))}
       </div>

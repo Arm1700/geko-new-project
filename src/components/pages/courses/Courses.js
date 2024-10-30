@@ -1,18 +1,18 @@
-import popularCoursesArray from '../../../entities/popularCoursesArray';
-import {coursesArray} from "../../../entities/coursesArray";
-import PopularCourse from '../shared/home/PopularCourse';
-import {useNavigate, useParams} from "react-router-dom";
 import ReactPaginate from 'react-paginate';
+import {useNavigate, useParams} from "react-router-dom";
 import {useState, useEffect} from 'react';
 import CoursesMenu from "./CoursesMenu";
+import Course from "../shared/home/Course";
 
 export default function Courses() {
     const [gridStyleTF, setGridStyle] = useState(true);
     const [coursesPerPage, setCoursesPerPage] = useState(3);
     const [currentPage, setCurrentPage] = useState(1);
+    const [courses, setCourses] = useState([]);
+    const [popularCourses, setPopularCourses] = useState([]);
     const nav = useNavigate();
-    const {id: categoryId} = useParams()
-    const handleCategoryClick = (id) => {
+    const {id: coursesId} = useParams()
+    const handleCoursesClick = (id) => {
         nav(`/course-category/${id}`);
     };
     const [showMenu, setShowMenu] = useState(false);
@@ -20,20 +20,48 @@ export default function Courses() {
     const toggleMenu = () => {
         setShowMenu(!showMenu);
     };
+    useEffect(() => {
+        const fetchCategories = async () => {
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/api/courses/`);
+                // const response = await fetch(`https://dev.gekoeducation.com/api/categories/`);
+                const data = await response.json();
+                console.log(data)
+                setCourses(data); // Сохранение категорий в состояние
+            } catch (error) {
+                console.error('Error fetching categories:', error);
+            }
+        };
 
-    const filteredCourses = categoryId ? popularCoursesArray.filter(course => course.category.toString() === categoryId) : popularCoursesArray;
+        fetchCategories();
+    }, []);
+
+    useEffect(() => {
+        const fetchCourses = async () => {
+            try {
+                const response = await fetch(`http://127.0.0.1:8000/api/courses/${coursesId}/`);
+                // const response = await fetch(`https://dev.gekoeducation.com/api/categories/${categoryId}/`);
+                const data = await response.json();
+                console.log(data)
+                setPopularCourses(data); // Сохранение курсов в состояние
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+            }
+        };
+
+        if (coursesId) {
+            fetchCourses();
+        }
+    }, [coursesId]);
 
     useEffect(() => {
         setCurrentPage(1); // Reset to the first page when the category changes
         setCoursesPerPage(6)
-    }, [categoryId]);
+    }, [coursesId]);
 
     const startIndex = (currentPage - 1) * coursesPerPage;
-    const endIndex = Math.min(startIndex + coursesPerPage, filteredCourses.length);
-    const totalPages = Math.ceil(filteredCourses.length / coursesPerPage);
-    const paginatedCourses = () => {
-        return filteredCourses.slice(startIndex, endIndex);
-    };
+    const endIndex = Math.min(startIndex + coursesPerPage, popularCourses.length);
+    const totalPages = Math.ceil(popularCourses.length / coursesPerPage);
 
     const handlePageChange = (data) => {
         setCurrentPage(data.selected + 1);
@@ -55,28 +83,13 @@ export default function Courses() {
         previousClassName={'pagination__previous'}
         nextClassName={currentPage === totalPages ? 'pagination__next disabled' : 'pagination__next'} // Disable next on last page
     />);
-    let gridStyle = gridStyleTF === true ? 'md:grid-cols-3 sm:grid-cols-2 grid-cols-1 ' : 'grid-cols-1';
-    return (<main className="max:px-5 max-w-[1300px] mx-auto py-5 flex flex-col">
+    let gridStyle = gridStyleTF === true ? 'md:grid-cols-4 sm:grid-cols-2 grid-cols-1 ' : 'grid-cols-1';
+    return (<main className="max:px-5 max-w-[1300px] mx-auto py-5 flex flex-col min-h-[52.3vh]">
         <h1 className="text-5xl font-roboto-slab font-bold text-primaryDark">
             Courses
         </h1>
         <div className="flex mid:flex-row flex-col  gap-5 py-10">
-            <div className="w-[25%] mid:flex flex-col hidden h-min border-b" style={{
-                position: 'sticky', top: `10px`,
-            }}>
-                <h1 className="min-w-max text-2xl font-roboto-slab font-bold text-primaryDark">
-                    Categories
-                </h1>
-                {coursesArray.sort((a, b) => a.text.localeCompare(b.text)).map(({id, text}) => (<p
-                    onClick={() => handleCategoryClick(id)}
-                    className={`min-w-max w-full textHover cursor-pointer py-[5px] ${+categoryId === id ? "text-color56" : "text-primaryDark"}`}
-                    key={id}>{text}
-                </p>))}
-            </div>
-            <button onClick={toggleMenu} className="mid:hidden flex bg-color56 text-white font-roboto-slab text-sm uppercase font-bold w-min px-9 py-2">
-                Filter
-            </button>
-            <div className="mid:w-[80%] w-full">
+            <div className="w-full">
                 <div className="flex gap-3 items-center">
                     <i
                         className={`fa fa-th-large text-xl hover:text-color56 cursor-pointer ${gridStyleTF === true ? 'text-color56' : 'text-color66'}`}
@@ -89,19 +102,17 @@ export default function Courses() {
                         onClick={() => setGridStyle(false)}
                     ></i>
                     <p className="text-color66 text-custom-15">
-                        {`Showing ${startIndex + 1}-${endIndex} of ${filteredCourses.length} results`}
+                        {`Showing ${startIndex + 1}-${endIndex} of ${popularCourses.length} results`}
                     </p>
                 </div>
                 <div
-                    className={`opacityPopularCourse content-center grid ${gridStyle} ${gridStyleTF === true ? 'gap-10' : 'gap-0'} py-6`}>
-                    {paginatedCourses().map(({image, id, title, count, desc, price}) => {
-                        return (<PopularCourse
+                    className={`opacityPopularCourseStand content-center grid ${gridStyle} ${gridStyleTF === true ? 'gap-10' : 'gap-0'} py-6`}>
+                    {courses.map(({image, id, name, desc}) => {
+                        return (<Course
                             gridStyleTF={gridStyleTF}
                             desc={desc}
                             image={image}
-                            title={title}
-                            count={count}
-                            price={price}
+                            name={name}
                             key={id}
                             id={id}
                         />)
@@ -110,6 +121,6 @@ export default function Courses() {
                 {renderPagination()}
             </div>
         </div>
-        <CoursesMenu isOpen={showMenu} toggleMenu={toggleMenu} categoryId={categoryId}/>
+        <CoursesMenu isOpen={showMenu} toggleMenu={toggleMenu} categoryId={coursesId}/>
     </main>);
 }

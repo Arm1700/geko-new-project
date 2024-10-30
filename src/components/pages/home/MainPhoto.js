@@ -30,9 +30,8 @@ export default function MainPhoto({image, text1, text2}) {
             </video>
             <div className="popularDiv relative absoluteP middle:top-[175px] top-[125px] left-[50%]">
                 <div className="relative z-10 bg-white text-color12 middle:w-[520px] w-full p-[30px]">
-                    <h5 className="text-bold sm:text-xl mb-5 font-roboto-slab-sans font-bold">{text1}</h5>
                     <h1 className="font-roboto-slab no-underline whitespace-no-wrap min-h-0 min-w-0 text-left leading-60 tracking-normal font-bold text-4xl sm:text-5xl backdrop-filter-none filter-none transform-origin-center opacity-100 translate-x-0 translate-y-0 visible">
-                        {text2}
+                        Today a Reader, Tomorrow a Leader
                     </h1>
                 </div>
             </div>

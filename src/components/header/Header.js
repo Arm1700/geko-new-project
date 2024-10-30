@@ -10,7 +10,7 @@ export default function Header() {
     };
 
     return (
-        <header className="flex flex-col bg-colorFb">
+        <header className="flex flex-col bg-colorFb w-full">
             <div>
                 <Menu toggleMenu={toggleMenu} showMenu={showMenu}/>
             </div>

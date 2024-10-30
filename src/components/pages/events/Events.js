@@ -12,7 +12,7 @@ export default function Events() {
     ]
 
     return (
-        <main className="px-5 max-w-[1300px] mx-auto py-5 flex flex-col">
+        <main className="px-5 max-w-[1300px] mx-auto py-5 flex flex-col min-h-[52.3vh]">
             <h1 className="text-5xl font-roboto-slab font-bold text-color12">
                 Events
             </h1>

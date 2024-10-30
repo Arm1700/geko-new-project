@@ -6,9 +6,9 @@ const en = {
         BLOG: "blog",
         CONTACTS: "Contacts",
         COURSES: "Courses",
-        EVENTS: "events",
+        EVENTS: "Events",
         TERMINATES: "Terminates",
-        GALLERY: "GALLERY"
+        GALLERY: "Gallery"
     },
 };
 

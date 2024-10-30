@@ -9,7 +9,8 @@ export default function Gallery() {
     useEffect(() => {
         const fetchCourses = async () => {
             try {
-                const response = await fetch(`http://127.0.0.1:8000/api/courses/`);
+                // const response = await fetch(`http://127.0.0.1:8000/api/courses/`);
+                const response = await fetch(`https://grandstage.gekoeducation.com/api/courses/`);
                 const data = await response.json();
                 setTabs(data);
                 const combinedGalleries = data.flatMap((tab) => tab.galleries);

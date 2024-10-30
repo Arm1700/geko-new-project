@@ -1,5 +1,4 @@
 import MainPhoto from './MainPhoto'
-import popularCoursesArray from '../../../entities/popularCoursesArray'
 import lessonInfoArray from '../../../entities/lessonInfoArray'
 import LessonInfo from '../shared/home/LessonInfo'
 import eventsArray from '../../../entities/eventsArray'
@@ -16,7 +15,6 @@ import {A11y} from "swiper/modules";
 import {Swiper, SwiperSlide} from "swiper/react";
 
 export default function Home() {
-    const [selectedCourses, setSelectedCourses] = useState(1);
     const [certificate, setCertificate] = useState([]);
     const [courses, setCourses] = useState([]);
     const [slidesToShow, setSlidesToShow] = useState(4)
@@ -75,12 +73,7 @@ export default function Home() {
         fetchCategories();
     }, []);
 
-    const handleCoursesClick = (course) => {
-        setSelectedCourses(course);
-    };
 
-    const filteredCourses = selectedCourses ? popularCoursesArray.filter(course => course.category === selectedCourses) : popularCoursesArray;
-    console.log(filteredCourses)
 
     const url = ''
     return (<main>

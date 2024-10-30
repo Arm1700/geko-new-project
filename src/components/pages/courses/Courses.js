@@ -1,5 +1,5 @@
 import ReactPaginate from 'react-paginate';
-import {useNavigate, useParams} from "react-router-dom";
+import {useParams} from "react-router-dom";
 import {useState, useEffect} from 'react';
 import CoursesMenu from "./CoursesMenu";
 import Course from "../shared/home/Course";
@@ -10,11 +10,7 @@ export default function Courses() {
     const [currentPage, setCurrentPage] = useState(1);
     const [courses, setCourses] = useState([]);
     const [popularCourses, setPopularCourses] = useState([]);
-    const nav = useNavigate();
     const {id: coursesId} = useParams()
-    const handleCoursesClick = (id) => {
-        nav(`/course-category/${id}`);
-    };
     const [showMenu, setShowMenu] = useState(false);
 
     const toggleMenu = () => {

@@ -38,8 +38,11 @@ export default function Course({
                     backgroundImage: isHovered
                         ? `linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), url(${image})`
                         : `url(${image})`,
-                    backgroundSize: '100% 100%',
-                    aspectRatio: "4 / 3",
+                    backgroundSize: 'cover',
+                    backgroundPosition: 'center', // Центрирует изображение
+                    width: '100%', // Полная ширина контейнера
+                    height: '100%', // Полная высота контейнера
+                    aspectRatio: '1/1', // Квадратное соотношение сторон
                 }}
             >
                 <FaExternalLinkAlt

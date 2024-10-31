@@ -2,12 +2,15 @@
 .absoluteP {
     transform: translate(-50%, -50%);
 }
-.opacityPopularCourseStand{
+
+.opacityPopularCourseStand {
     transition: all 1s ease;
 }
+
 .opacityPopularCourseStand2 {
-    transition: all 0.5s ;
+    transition: all 0.5s;
 }
+
 /*.opacityPopularCourse {*/
 /*    position: relative;*/
 /*    overflow: hidden;*/
@@ -41,7 +44,6 @@
 /*.opacityPopularCourse:hover .hover-content {*/
 /*    transform: translateY(0); !* Показываем блок при наведении *!*/
 /*}*/
-
 
 
 /* Pagination.css */
@@ -86,6 +88,7 @@
     cursor: pointer;
     font-weight: 700;
 }
+
 .pagination__previous:hover,
 .pagination__next:hover,
 .pagination__link:hover {
@@ -105,25 +108,28 @@
 }
 
 .popular {
-    width: 1300px;
+    width: 1400px;
 }
 
-@media (max-width: 1300px) {
+@media (max-width: 1400px) {
     .popular {
         width: 100%;
     }
 
     .popularDiv {
-        width: 100%;
+        width: 90%;
+        padding: 40px 0px;
     }
 }
+
 @media (max-width: 992px) {
     .popular {
         gap: 20px;
     }
 
     .popularDiv {
-        width: 100%;
+        width: 90%;
+        padding: 40px 0px;
     }
 }
 
@@ -134,8 +140,27 @@
     }
 
     .popularDiv {
-        width: 100%;
+        width: 90%;
+        padding: 40px 0px;
     }
+}
+
+.custom-button-prev, .custom-button-prev2, .custom-button-next, .custom-button-next2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Полупрозрачный фон */
+    border-radius: 50%; /* Закругленные углы */
+    width: 40px; /* Ширина кнопок */
+    height: 40px; /* Высота кнопок */
+    cursor: pointer; /* Указатель при наведении */
+    z-index: 10; /* Убедитесь, что они над слайдами */
+    font-size: 48px; /* Размер текста стрелок */
+    color: #5625D0; /* Цвет текста стрелок */
+}
+
+.custom-button-prev:hover, .custom-button-prev2:hover, .custom-button-next:hover, .custom-button-next2:hover {
+    background-color: rgba(255, 255, 255, 1); /* Цвет фона при наведении */
 }
 
 
@@ -179,6 +204,7 @@
 ::-webkit-scrollbar {
     width: 7px;
 }
+
 ::-webkit-scrollbar-thumb {
     background: #5625D0; /* Use a darker shade or different color for the scrollbar handle */
     border-radius: 6px;

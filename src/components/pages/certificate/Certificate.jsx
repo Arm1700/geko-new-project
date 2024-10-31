@@ -1,11 +1,13 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation, A11y} from "swiper/modules";
-import React, {useState} from "react";
+import React, {useRef, useState} from "react";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/swiper-bundle.css';
 
 export default function Certificate({certificate, slidesToShow}) {
+    const swiperRef2 = useRef(null);
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
 
@@ -27,14 +29,24 @@ export default function Certificate({certificate, slidesToShow}) {
     };
 
     return (
-        <div className='flex justify-between'>
+        <div className='flex justify-between items-center'>
+            {/* Кастомные стрелки */}
+            <div className="custom-button-prev2" onClick={() => swiperRef2.current?.slidePrev()}>
+                &lt; {/* Левый символ */}
+            </div>
             <Swiper
                 loop={true}
-                modules={[A11y]}
+                modules={[Navigation, A11y]}
+                navigation={{
+                    nextEl: '.custom-button-next2',
+                    prevEl: '.custom-button-prev2',
+                }}
                 slidesPerView={slidesToShow}
                 spaceBetween={50}
                 speed={500}
-                onSwiper={(swiper) => console.log(swiper)}
+                onSwiper={(swiper) => {
+                    swiperRef2.current = swiper; // Сохраняем ссылку на экземпляр Swiper
+                }}
                 onSlideChange={() => console.log('slide change')}
             >
                 {certificate.map(({id, img}, index) => (
@@ -42,14 +54,14 @@ export default function Certificate({certificate, slidesToShow}) {
                                  style={{
                                      display: 'flex',
                                      justifyContent: 'center',
+                                     padding: '0px 40px'
                                  }}
                     >
                         <div
-                            className=" py-[30px] border border-gray-300 flex justify-center flex-col gap-7"
+                            className=" py-[30px]  border border-gray-300 flex justify-center flex-col gap-7"
                             onClick={() => handleImageClick(index)}
                             style={{
                                 textAlign: 'center',
-                                // borderRadius: '8px',
                                 padding: '15px',
                             }}
                         >
@@ -67,6 +79,9 @@ export default function Certificate({certificate, slidesToShow}) {
                     </SwiperSlide>
                 ))}
             </Swiper>
+            <div className="custom-button-next2" onClick={() => swiperRef2.current?.slideNext()}>
+                &gt; {/* Правый символ */}
+            </div>
             {isModalOpen && (
                 <div
                     className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"

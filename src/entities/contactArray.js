@@ -8,14 +8,14 @@ const contactArray = [
   title:'Address Way',
   color:'#2e67f5',
   Icon:MdOutlinePlace,
-  description:'1800 Abbot Kinney Blvd. Unit D & E Venice'
+  description:'725 E Broadway, Glendale, CA, United States, 91205'
 },
 {
   id:2,
   title:'Contact info',
   color:'#5ebb3e',
   Icon:MdOutlineContactMail,
-  description:'Mobile: (+88) - 1990 - 6886 \n Hotline: 1800 - 1102 \n Mail: contact@eduma.com'
+  description:'Mobile: +1 747-236-8888 \n Hotline: 1800 - 1102 \n Mail: contact@eduma.com'
 },
 {
   id:3,

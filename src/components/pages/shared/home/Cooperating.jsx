@@ -7,7 +7,7 @@ export default function Cooperating() {
 
     console.log()
     return (
-        <div className="slider-container relative">
+        <div className="slider-container relative py-7">
             <div>
                 <div className='px-5 max-w-[1300px] mx-[auto]'>
                     <Slider

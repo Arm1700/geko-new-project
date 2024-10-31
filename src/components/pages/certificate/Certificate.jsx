@@ -1,12 +1,14 @@
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Navigation, A11y} from "swiper/modules";
-import React, {useRef, useState} from "react";
+import React, {useContext, useRef, useState} from "react";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/swiper-bundle.css';
+import {DataContext} from "../data/DataProvider";
 
-export default function Certificate({certificate, slidesToShow}) {
+export default function Certificate({slidesToShow}) {
     const swiperRef2 = useRef(null);
+    const { certificate } = useContext(DataContext); // Use context
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -29,7 +31,7 @@ export default function Certificate({certificate, slidesToShow}) {
     };
 
     return (
-        <div className='flex justify-between items-center'>
+        <div className='flex justify-between items-center relative'>
             {/* Кастомные стрелки */}
             <div className="custom-button-prev2" onClick={() => swiperRef2.current?.slidePrev()}>
                 &lt; {/* Левый символ */}
@@ -54,7 +56,6 @@ export default function Certificate({certificate, slidesToShow}) {
                                  style={{
                                      display: 'flex',
                                      justifyContent: 'center',
-                                     padding: '0px 40px'
                                  }}
                     >
                         <div

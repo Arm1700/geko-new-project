@@ -1,39 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, {useContext, useState} from 'react';
 import GalleryComponent from './GalleryComponent';
+import {DataContext} from "../data/DataProvider";
 
 export default function Gallery() {
-    const [tabs, setTabs] = useState([]);
     const [activeTab, setActiveTab] = useState(0);
-    const [allGalleries, setAllGalleries] = useState([]);
 
-    useEffect(() => {
-        const fetchCourses = async () => {
-            try {
-                // const response = await fetch(`http://127.0.0.1:8000/api/courses/`);
-                const response = await fetch(`https://grandstage.gekoeducation.com/api/courses/`);
-                const data = await response.json();
-                setTabs(data);
-                const combinedGalleries = data.flatMap((tab) => tab.galleries);
-                setAllGalleries(combinedGalleries);
-            } catch (error) {
-                console.error('Error fetching categories:', error);
-            }
-        };
+    const {courses} = useContext(DataContext); // Use context
 
-        fetchCourses();
-    }, []);
 
     // Определяем галереи для текущей вкладки
     const activeGalleries = activeTab === 0
-        ? allGalleries
-        : tabs.find(tab => tab.id === activeTab)?.galleries || [];
+        ? courses.flatMap((tab) => tab.galleries)
+        : courses.find(tab => tab.id === activeTab)?.galleries || [];
 
     return (
         <main className="px-5 max-w-[1300px] mx-auto py-5 flex flex-col min-h-[52.3vh]">
             <div className="flex flex-col gap-[20px]">
                 <p className="text-5xl text-color12 font-roboto-slab font-bold">Gallery</p>
             </div>
-            <div className="flex justify-center w-full flex-wrap">
+            <div className="grid
+
+             md:grid-cols-6 sm:grid-cols-4 grid-cols-2
+             w-full justify-center">
                 <button
                     className={`${
                         activeTab === 0
@@ -44,7 +32,7 @@ export default function Gallery() {
                 >
                     All
                 </button>
-                {tabs.map((tab) => (
+                {courses.map((tab) => (
                     <button
                         key={tab.id}
                         className={`${
@@ -59,7 +47,7 @@ export default function Gallery() {
                 ))}
             </div>
             <div>
-                <GalleryComponent key={activeTab} activeTab={activeTab} galleries={activeGalleries} />
+                <GalleryComponent key={activeTab} activeTab={activeTab} galleries={activeGalleries}/>
             </div>
         </main>
     );

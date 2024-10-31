@@ -1,4 +1,6 @@
 /* Course */
+
+
 .absoluteP {
     transform: translate(-50%, -50%);
 }
@@ -108,17 +110,17 @@
 }
 
 .popular {
-    width: 1400px;
+    width: 1300px;
 }
 
-@media (max-width: 1400px) {
+@media (max-width: 1300px) {
     .popular {
         width: 100%;
     }
 
     .popularDiv {
         width: 90%;
-        padding: 40px 0px;
+        padding: 40px 0;
     }
 }
 
@@ -129,7 +131,7 @@
 
     .popularDiv {
         width: 90%;
-        padding: 40px 0px;
+        padding: 40px 0;
     }
 }
 
@@ -141,11 +143,12 @@
 
     .popularDiv {
         width: 90%;
-        padding: 40px 0px;
+        padding: 40px 0;
     }
 }
 
 .custom-button-prev, .custom-button-prev2, .custom-button-next, .custom-button-next2 {
+    position: absolute;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -159,6 +162,14 @@
     color: #5625D0; /* Цвет текста стрелок */
 }
 
+.custom-button-prev,
+.custom-button-prev2{
+    right: 100%;
+}
+.custom-button-next,
+.custom-button-next2{
+    left: 100%;
+}
 .custom-button-prev:hover, .custom-button-prev2:hover, .custom-button-next:hover, .custom-button-next2:hover {
     background-color: rgba(255, 255, 255, 1); /* Цвет фона при наведении */
 }

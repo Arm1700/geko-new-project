@@ -101,9 +101,6 @@ const eventsArray = [
         image: 'https://eduma.thimpress.com/wp-content/uploads/2015/11/event-1-450x233.jpg',
         status: 'expired',
         outcomed: ['Over 37 lectures and 55.5 hours of content!', 'LIVE PROJECT End to End Software Testing Training Included.', 'Learn Software Testing and Automation basics from a professional trainer from your own desk.', 'Information packed practical training starting from basics to advanced testing techniques.', 'Best suitable for beginners to advanced level users and who learn faster when demonstrated.', 'Course content designed by considering current software testing technology and the job market.', 'Practical assignments at the end of every session.', 'Practical learning experience with live project work and examples.',],
-        totalSlots: 110,
-        bookedSlots: 5,
-        cost: 0,
 }];
 
 export default eventsArray;

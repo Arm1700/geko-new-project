@@ -2,7 +2,6 @@ import React, {useLayoutEffect, useState, memo, useRef, useContext} from "react"
 import MainPhoto from "./MainPhoto";
 import lessonInfoArray from "../../../entities/lessonInfoArray";
 import LessonInfo from "../shared/home/LessonInfo";
-import eventsArray from "../../../entities/eventsArray";
 import Event from "../events/Event";
 import Course from "../shared/home/Course";
 import Certificate from "../certificate/Certificate";
@@ -22,9 +21,10 @@ const MemoizedEvent = memo(Event);
 const MemoizedTestimonials = memo(Testimonials);
 
 export default function Home() {
-    const {courses, certificate} = useContext(DataContext); // Use context
+    const {courses, certificate,events} = useContext(DataContext); // Use context
     const swiperRef = useRef(null);
     const [slidesToShow, setSlidesToShow] = useState(4);
+
 
     // Adjust slider display based on screen width
     useLayoutEffect(() => {
@@ -135,7 +135,7 @@ export default function Home() {
                 <div className="mid:max-w-[1300px] w-full mid:mx-auto gap-5 grid mid:grid-cols-2 grid-cols-1 justify-between">
                     <div className="flex justify-between flex-col bg-colorF2 px-10 py-7 w-full">
                         <h1 className="text-custom-28 font-roboto-slab font-bold text-color12 pb-5">Events</h1>
-                        {eventsArray.slice(0, 3).map(({ id, day, month, title, hour, place, description, image }) => (
+                        {events.slice(0, 3).map(({ id, day, month, title, hour, place, description, image }) => (
                             <MemoizedEvent key={id} id={id} day={day} month={month} title={title} hour={hour}
                                            place={place} description={description} image={image} />
                         ))}

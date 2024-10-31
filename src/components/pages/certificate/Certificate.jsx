@@ -1,14 +1,15 @@
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Navigation, A11y} from "swiper/modules";
-import React, {useContext, useRef, useState} from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, A11y } from "swiper/modules";
+import React, { useContext, useRef, useState, useEffect } from "react";
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/swiper-bundle.css';
-import {DataContext} from "../data/DataProvider";
+import { DataContext } from "../data/DataProvider";
 
-export default function Certificate({slidesToShow}) {
+export default function Certificate({ slidesToShow }) {
     const swiperRef2 = useRef(null);
-    const { certificate } = useContext(DataContext); // Use context
+    const swiperRef3 = useRef(null);
+    const { certificate } = useContext(DataContext); // Используем контекст
 
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -29,6 +30,24 @@ export default function Certificate({slidesToShow}) {
             closeModal(); // Закрываем окно только если клик на фон, а не на изображение
         }
     };
+
+    // Обработка нажатий клавиш
+    const handleKeyDown = (event) => {
+        if (event.key === 'ArrowRight') {
+            swiperRef3.current?.slideNext(); // Переключаем на следующий слайд
+        } else if (event.key === 'ArrowLeft') {
+            swiperRef3.current?.slidePrev(); // Переключаем на предыдущий слайд
+        }
+    };
+    // Добавляем обработчик событий клавиатуры
+    useEffect(() => {
+        if (isModalOpen) {
+            window.addEventListener('keydown', handleKeyDown);
+        }
+        return () => {
+            window.removeEventListener('keydown', handleKeyDown);
+        };
+    }, [isModalOpen]);
 
     return (
         <div className='flex justify-between items-center relative'>
@@ -51,7 +70,7 @@ export default function Certificate({slidesToShow}) {
                 }}
                 onSlideChange={() => console.log('slide change')}
             >
-                {certificate.map(({id, img}, index) => (
+                {certificate.map(({ id, img }, index) => (
                     <SwiperSlide key={id}
                                  style={{
                                      display: 'flex',
@@ -59,7 +78,7 @@ export default function Certificate({slidesToShow}) {
                                  }}
                     >
                         <div
-                            className=" py-[30px]  border border-gray-300 flex justify-center flex-col gap-7"
+                            className="py-[30px] border border-gray-300 flex justify-center flex-col gap-7"
                             onClick={() => handleImageClick(index)}
                             style={{
                                 textAlign: 'center',
@@ -88,14 +107,22 @@ export default function Certificate({slidesToShow}) {
                     className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
                     onClick={handleModalClick} // Обрабатываем клик на фон
                 >
+                    <div className="custom-button-prev3" onClick={() => swiperRef3.current?.slidePrev()}>
+                        &lt; {/* Левый символ */}
+                    </div>
                     <div className="relative w-full h-full max-w-5xl max-h-[90%] flex items-center justify-center">
                         <Swiper
                             loop={true}
                             initialSlide={selectedImageIndex} // Начинаем с выбранного изображения
                             modules={[Navigation, A11y]}
                             slidesPerView={1}
-                            navigation
-                            pagination={{clickable: true}}
+                            navigation={{
+                                nextEl: '.custom-button-next3',
+                                prevEl: '.custom-button-prev3',
+                            }}
+                            onSwiper={(swiper) => {
+                                swiperRef3.current = swiper; // Сохраняем ссылку на экземпляр Swiper
+                            }}
                             onSlideChange={(swiper) => setSelectedImageIndex(swiper.activeIndex)}
                         >
                             {certificate.map(({id, img}) => (
@@ -107,6 +134,9 @@ export default function Certificate({slidesToShow}) {
                                 </SwiperSlide>
                             ))}
                         </Swiper>
+                        <div className="custom-button-next3" onClick={() => swiperRef3.current?.slideNext()}>
+                            &gt; {/* Правый символ */}
+                        </div>
                         <button
                             onClick={closeModal}
                             className="absolute top-4 right-4 text-white text-[30px] hover:text-red-500"
@@ -118,4 +148,4 @@ export default function Certificate({slidesToShow}) {
             )}
         </div>
     );
-};
+}

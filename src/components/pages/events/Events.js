@@ -1,9 +1,10 @@
-import React, {useState} from 'react'
-import eventsArray from '../../../entities/eventsArray'
+import React, {useContext, useState} from 'react'
 import Event from './Event2'
+import {DataContext} from "../data/DataProvider";
 
 export default function Events() {
     const [activeTab, setActiveTab] = useState('happening')
+    const {events} = useContext(DataContext); // Use context
 
     const tabs = [
         {title: 'happening', id: 1},
@@ -32,7 +33,7 @@ export default function Events() {
                 ))}
             </div>
             <div className="text-start">
-                {eventsArray.map(
+                {events.map(
                     ({
                          id,
                          status,

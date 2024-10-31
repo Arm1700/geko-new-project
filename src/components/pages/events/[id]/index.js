@@ -3,14 +3,17 @@ import {TbClockHour9} from 'react-icons/tb'
 import {FaFlag} from "react-icons/fa";
 import {FaMapMarkerAlt} from "react-icons/fa";
 import Error404 from '../../shared/Error'
-import eventsArray from "../../../../entities/eventsArray";
+import {useContext} from "react";
+import {DataContext} from "../../data/DataProvider";
 
 export default function EventsPage() {
-    const {id: envents,} = useParams()
+    const {id: eventId,} = useParams()
     const nav = useNavigate();
+    const {events} = useContext(DataContext); // Use context
+
 
     const pickedEvent =
-        eventsArray?.find(el => el.id === +envents)
+        events?.find(el => el.id === +eventId)
     return (
         <section className="md:before:h-[22%] before:h-[0] py-5 relative pb-5">
             {pickedEvent?.id ? (
@@ -44,12 +47,12 @@ export default function EventsPage() {
                                 <h1 className="text-2xl font-roboto-slab font-bold text-color12">
                                     EVENT DESCRIPTION
                                 </h1>
-                                <p className="text-custom-15 text-color60">{pickedEvent.eventDescription}</p>
+                                <p className="text-custom-15 text-color60">{pickedEvent.event_description}</p>
                                 <h1 className="text-2xl font-roboto-slab font-bold text-color12">
                                     EVENT CONTENT
                                 </h1>
                                 <ul className="list-none text-color56">
-                                    {pickedEvent.outcomed?.map((el, i) => {
+                                    {pickedEvent.outcomes?.map((el, i) => {
                                         return (
                                             <li
                                                 key={i}
@@ -57,7 +60,7 @@ export default function EventsPage() {
                                             >
                                                 <span className="w-[6px] h-[6px] bg-color56 rounded-full mr-2"></span>
                                                 <p className="pl-3 ">
-                                                    {el}
+                                                    {el.text}
                                                 </p>
                                             </li>
                                         )

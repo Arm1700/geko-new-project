@@ -26,8 +26,7 @@ export const DataProvider = ({children}) => {
                     throw new Error(`Error fetching certificates: ${certificatesResponse.statusText}`);
                 }
 
-
-                if (!certificatesResponse.ok) {
+                if (!eventsResponse.ok) {
                     throw new Error(`Error fetching events: ${eventsResponse.statusText}`);
                 }
 
@@ -55,7 +54,7 @@ export const DataProvider = ({children}) => {
         const savedCertificates = localStorage.getItem('certificates');
         const savedEvents = localStorage.getItem('events');
 
-        if (!savedCourses || !savedCertificates) {
+        if (!savedCourses || !savedCertificates || !savedEvents) {
             fetchData();
         } else {
             setCourses(JSON.parse(savedCourses));
